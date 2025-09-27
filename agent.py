@@ -2,6 +2,10 @@ from langgraph.prebuilt import create_react_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.checkpoint.memory import InMemorySaver
 from serpapi import GoogleSearch  # ✅ Correct import
+import langgraph
+
+from langgraph.prebuilt import create_react_agent
+
 
 # --- API KEYS ---
 GEMINI_API_KEY = "AIzaSyDkk4Po9JXSK6mfYWjqZyw18cJE4pyoljg"  # apna Gemini API key lagao
@@ -45,7 +49,7 @@ def serpapi_search(query: str):
 memory = InMemorySaver()
 
 # --- Create the Agent ---
-agent = create_react_agent(
+memory_agent = create_react_agent(
     model=llm,
     tools=[serpapi_search],
     prompt="You are a helpful assistant",
@@ -53,9 +57,4 @@ agent = create_react_agent(
 )
 
 # --- Run the Agent ---
-response = agent.invoke(
-    {"messages": [{"role": "user", "content": "Who won in the 2nd Sep Pak Cricket match"}]},
-    config={"configurable": {"thread_id": "user123"}}
-)
 
-print(response['messages'][-1].content)
