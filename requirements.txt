@@ -1,0 +1,5 @@
+streamlit
+google-search-results  # SerpApi ke liye
+langchain
+langchain-community
+langchain-openai
