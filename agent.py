@@ -1,4 +1,5 @@
 from langgraph.prebuilt import create_react_agent
+from serpapi import GoogleSearch
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.checkpoint.memory import InMemorySaver
@@ -20,8 +21,7 @@ llm = ChatGoogleGenerativeAI(
 
 
 
-from serpapi import GoogleSearch
-
+from serpapi import GoogleSearch # <-- fixed import
 
 def serpapi_search(query: str):
     """Searches for a query using the SerpAPI."""
@@ -34,7 +34,6 @@ def serpapi_search(query: str):
     search = GoogleSearch(params)
     results = search.get_dict()
     
-    # Extract top results (titles + links)
     if "organic_results" in results:
         return [
             {"title": r["title"], "link": r["link"], "snippet": r.get("snippet", "")}
