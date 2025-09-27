@@ -1,5 +1,5 @@
 import streamlit as st
-from agent import memory_agent
+from agent import agent
 
 
 st.title("Talk to Agent")
@@ -14,7 +14,7 @@ if st.button("Submit") and user_input:
     # Add user message to history
     st.session_state['messages'].append({"role": "user", "content": user_input})
     with st.spinner("Agent is thinking..."):
-        response = memory_agent.invoke(
+        response = agent.invoke(
             {"messages": st.session_state['messages']},
             config={"configurable": {"thread_id": "user123"}}
         )
